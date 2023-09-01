@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">Items</h1>
+<a class="btn btn-primary" href="{% url 'items:create' %}">Add</a>
+<table class="table table-striped mt-5">
+    <thead class="thead-dark">
+        <tr>
+            <td style="width: 10%">Id</td>
+            <td style="width: 10%">Photo</td>
+            <td style="width: 40%">Name</td>
+            <td style="width: 30%">SN</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in item_list %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td><img alt="{{ item.name }}" class="img-thumbnail" src="{{ item.thumbnail_uri }}"></td>
+            <td><a href="{% url 'items:detail' item.pk %}">{{ item.name }}</a></td>
+            <td>{{ item.serial_number }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

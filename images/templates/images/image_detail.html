@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+<h1 class="mt-5">{{ object.filename }}</h1>
+<a href="{% url 'images:delete' object.pk %}" class="btn btn-danger">Delete</a>
+<div>
+    <img style="max-width: 100%" alt="{{ object.filename }}" src="{{ object.main_image_uri }}">
+</div>
+
+{% endblock %}

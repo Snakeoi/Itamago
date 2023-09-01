@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block content %}
+    <div class="modal" tabindex="-1" id="delete_window">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete: {{ object.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to completely delete {{ object.name }}. It will not be possible to restore it.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="{% url 'items:delete' object.pk %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col">
+            <img class="img-fluid" alt="{{ object.name }}" src="{{ item.main_image_uri }}">
+        </div>
+        <div class="col">
+            <h1>{{ object.name }}</h1>
+            <a class="btn btn-secondary" href="{% url 'items:list' %}">
+                Back
+            </a>
+            <a class="btn btn-primary" href="{% url 'items:update' object.pk %}">
+                Edit
+            </a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_window">
+                Delete
+            </button>
+            <table class="table table-bordered mt-5">
+                <tbody>
+                    <tr>
+                        <td>SN</td><td>{{ object.serial_number }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>{{ object.description|safe }}</p>
+        </div>
+    </div>
+{% endblock %}
